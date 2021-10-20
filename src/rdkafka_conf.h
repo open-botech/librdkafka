@@ -257,6 +257,7 @@ struct rd_kafka_conf_s {
                 char *principal;
                 char *mechanisms;
                 char *service_name;
+                char *kerberos_domain;
                 char *kinit_cmd;
                 char *keytab;
                 int   relogin_min_time;

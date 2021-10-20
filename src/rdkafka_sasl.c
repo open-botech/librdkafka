@@ -257,12 +257,17 @@ int rd_kafka_sasl_client_new (rd_kafka_transport_t *rktrans,
 
         rd_rkb_dbg(rkb, SECURITY, "SASL",
                    "Initializing SASL client: service name %s, "
-                   "hostname %s, mechanisms %s, provider %s",
+                   "hostname %s, kerberosDomain %s, mechanisms %s, provider %s",
                    rk->rk_conf.sasl.service_name, hostname,
+                   rk->rk_conf.sasl.kerberos_domain,
                    rk->rk_conf.sasl.mechanisms,
                    provider->name);
 
-        r = provider->client_new(rktrans, hostname, errstr, errstr_size);
+        if(strcmp(rk->rk_conf.sasl.kerberos_domain,"")){
+          r = provider->client_new(rktrans, rk->rk_conf.sasl.kerberos_domain, errstr, errstr_size);
+        }else{
+          r = provider->client_new(rktrans, hostname, errstr, errstr_size);
+        } 
         if (r != -1)
                 rd_kafka_transport_poll_set(rktrans, POLLIN);
 

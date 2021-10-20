@@ -887,6 +887,10 @@ static const struct rd_kafka_property rd_kafka_properties[] = {
           "This client's Kerberos principal name. "
           "(Not supported on Windows, will use the logon user's principal).",
 	  .sdef = "kafkaclient" },
+        { _RK_GLOBAL, "sasl.kerberos.domain", _RK_C_STR,
+	  _RK(sasl.kerberos_domain),
+	  "Kerberos domain name",
+          .sdef = ""},
         { _RK_GLOBAL, "sasl.kerberos.kinit.cmd", _RK_C_STR,
           _RK(sasl.kinit_cmd),
           "Shell command to refresh or acquire the client's Kerberos ticket. "
